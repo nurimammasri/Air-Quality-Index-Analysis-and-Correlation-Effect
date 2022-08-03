@@ -22,7 +22,7 @@ There are many different types of air pollutants, such as
 
 Both human activity and natural processes can generate air pollution.
 
-<img align="center" src="/image/Air Quality Index - Particulate Matter.png"  width="270"></img>
+<img align="center" src="/image/Air Quality Index - Particulate Matter.png"  width="350"></img>
 
 ## Features
 
