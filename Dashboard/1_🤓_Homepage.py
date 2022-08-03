@@ -8,6 +8,11 @@ import plotly.express as px
 import plotly.graph_objs as go
 import plotly.offline as pyoff
 from plotly.subplots import make_subplots
+import plotly.figure_factory as ff
+
+from sklearn.feature_selection import chi2
+from sklearn.feature_selection import SelectKBest
+
 import warnings # Ignores any warning
 warnings.filterwarnings("ignore")
 pd.set_option('display.max_columns', None)
@@ -456,4 +461,43 @@ with row13_1:
                     title="Correlation Category between {} dan {}".format(x_axis_val, y_axis_val))
     fig.update_layout(margin=dict(t=60, b=10))
     fig.layout.plot_bgcolor = "light grey"
+    st.plotly_chart(fig, use_container_width=True)
+
+
+row13_spacer1, row13_1, row13_spacer2, row13_2, row13_spacer3  = st.columns((.2, 6.4, 0.1, 4.4, .2))
+with row13_1:
+    df_corr = df[numericals].corr()
+    x = list(df_corr.columns)
+    y = list(df_corr.index)
+    z = np.array(df_corr)
+
+    fig = px.imshow(z, x=x, y=y, color_continuous_scale='Viridis', aspect="auto")
+    fig.update_traces(text=np.around(z, decimals=2), texttemplate="%{text}")
+    fig.update_xaxes(side="top")
+    fig.update_layout(margin=dict(t=60, b=10))
+    st.plotly_chart(fig, use_container_width=True)
+with row13_2:
+    X = df[numericals]
+    y = df[["Category"]]
+
+    # Calculating Score
+    test = SelectKBest(score_func=chi2, k=4)
+    fit = test.fit(X, y)
+    scores = fit.scores_
+
+    ft = pd.DataFrame({
+        "category":df[numericals].columns,
+        "score": scores
+    }).sort_values("score", ascending=False)
+    ft["score"] = ft["score"].round(decimals = 2)
+
+    # Plotting the ranks
+    fig = px.bar(ft, 
+                x="category", y="score", 
+                color="category",
+                color_discrete_sequence=px.colors.qualitative.G10,
+                text="score", 
+                title="Score Feature Important")
+    
+    fig.update_layout(margin=dict(t=60, b=10))
     st.plotly_chart(fig, use_container_width=True)
