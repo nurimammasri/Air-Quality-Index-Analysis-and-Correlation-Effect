@@ -19,7 +19,7 @@ pd.set_option('display.max_columns', None)
 
 
 st.set_page_config(
-    page_title="Multipage App",
+    page_title="Air Quality Index Analysis and Correlation Effect",
     page_icon="👋",
     layout="wide"
 )
