@@ -22,6 +22,8 @@ There are many different types of air pollutants, such as
 
 Both human activity and natural processes can generate air pollution.
 
+<img align="center" src="/image/Air Quality Index - Particulate Matter.png"  width="270"></img>
+
 ## Features
 
 - [x] [01. Most Polluted Cities and Countries (IQAir Index).ipynb](https://github.com/nurimammasri/Air-Quality-Index-Analysis-and-Correlation-Effect/blob/main/01.%20Most%20Polluted%20Cities%20and%20Countries%20(IQAir%20Index).ipynb)
