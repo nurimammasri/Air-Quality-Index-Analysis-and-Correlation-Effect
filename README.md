@@ -1,7 +1,7 @@
 <h1 align="center">
-  <img align="center" src="/image/logo.jpg"  width="270"></img>
-<br>
 Air Quality Index Analysis and Correlation Effect
+<br>
+<img align="center" src="/image/logo.jpg"  width="270"></img>
 </h1>
 
 *This is the Capstone Project of the Tetris 2.0 Program*
