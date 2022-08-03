@@ -7,6 +7,7 @@ import seaborn as sns
 import plotly.express as px
 import plotly.graph_objs as go
 import plotly.offline as pyoff
+from plotly.subplots import make_subplots
 import warnings # Ignores any warning
 warnings.filterwarnings("ignore")
 pd.set_option('display.max_columns', None)
@@ -170,18 +171,29 @@ with row3_1:
 
 row4_spacer1, row4_1, row4_spacer2, row4_2, row4_spacer3  = st.columns((.2, 4.4, 0.1, 6.4, .2))
 with row4_1:
+    
+    aqi = {
+        "index":["0-50", "51-100", "101-150", "151-200", "201-300", "301-500"],
+        "category":["Good","Moderate","Unhealthy for Sensitive Groups","Unhealthy","Very Unhealthy","Hazardous"]
+    }
+    aqi_tb = pd.DataFrame(aqi)
+    st.table(data=aqi_tb.reset_index(drop=True))
+
     ### Top 10 Polluted Country In World ###
     top_10_country = df_aqitpcr.head(20).copy()
-    top_10_country['Rank'] = 21-top_10_country['Rank']
+    top_10_country['Rank_new'] = 21-top_10_country['Rank']
     fig1= px.bar(top_10_country, y='Country/Region', 
-                x='Rank', color='2021',
-                title="Top 10 Polluted Country In World",
+                x='Rank_new', color='2021',
+                title="Top 20 Polluted Country In World",
                 text='2021',
-                height=600)
+                hover_data={'Rank_new':False, 'Rank':True, 'Population':True},
+                height=490)
     fig1.layout.plot_bgcolor = "white"
     fig1.update_layout(margin=dict(t=40, b=10))
     fig1.update_xaxes(visible=False, showticklabels=False)
     st.plotly_chart(fig1, use_container_width=True)
+
+
 with row4_2:
     top_10_country = df_aqitpcr.head(17).copy().iloc[11:18,:]
     top_10_country['Rank'] = 18-top_10_country['Rank']
@@ -206,13 +218,19 @@ with row4_2:
                 color='Country/Region',
                 title="Top 11-17 Yearly Air Quality Index", 
                 symbol='Country/Region',
-                text="AQI")
+                text="AQI",height=550)
     fig2.for_each_trace(lambda t: t.update(textfont_color="black", textposition='top right'))
     fig2.layout.plot_bgcolor = "light grey"
     fig2.update_yaxes(visible=False, showticklabels=False, )
     fig2.update_layout(margin=dict(t=40, b=10))
     st.plotly_chart(fig2, use_container_width=True)
-    st.markdown('Investigate a variety of stats for each team. Which team scores the most goals per game? How does your team compare in terms of distance ran per game?')    
+    
+    st.markdown("""
+    * It can be seen that **Indonesia** has a **17th Rating** with an AQI (Air Quality Index) value of **34.3** so it is considered **Good**.
+    * The value of AQI (Air Quality Index) in Indonesia in **2018** was **42**
+    * Then it rose 9.7 in **2019** by **51.7**
+    * Down in **2020 and 2021** maybe because of the number of vehicles and the process of activity during Covid-19.
+    """)    
    
 
 
@@ -238,7 +256,15 @@ with row5_1:
     fig1.update_layout(margin=dict(t=40, b=10))
     st.plotly_chart(fig1, use_container_width=True)
 with row5_2:
-    st.markdown('Investigate a variety of stats for each team. Which team scores the most goals per game? How does your team compare in terms of distance ran per game?')    
+    st.markdown("""
+    The total population in Indonesia ranks 4th:
+    * China = 1.4B
+    * India = 1.4B
+    * USA = 331M
+    * **Indonesia 273.5M**
+
+    The population of Indonesia has increased from time to time. The increase in population has a negative impact on the environment. the availability of green land as a source of clean air in urban areas is also reduced due to the many existing green lands being converted as settlements. Thus it can be said that an increase in population can lead to reduced availability of clean air. The reduced availability of clean air can also be caused by air pollution due to motor vehicle fumes.  
+    """)    
 
 
 # Get Indonesia Data
@@ -265,19 +291,26 @@ with row6_1:
     fig.update_layout(barmode='stack')
     fig.update_layout(margin=dict(t=40, b=10))
     fig.for_each_trace(lambda t: t.update(textfont_color="white"))
-    st.plotly_chart(fig, use_container_width=True)
-    st.markdown("""
-        **Keypoints Viz1**
+    st.plotly_chart(fig, use_container_width=True) 
 
+
+row7_spacer1, row7_1, row7_spacer2, row7_2, row7_spacer3  = st.columns((.2, 4.4, 0.1, 4.4, .2))
+with row7_1:
+    st.markdown("""
         * Overall, air pollution has gone down in the last 4 years being year 2021 to be the lowest 
         * Jakarta has highest average AQI score with 39.2 
         * Indralaya in South Sumatra has lowest score with 4.2 
+    """)
+with row7_2:
+    st.markdown("""
         * 4 out of 5 highest polluted cities is in Java 
         * Lowest 5 polluted cities located in Sumatra and Kalimantan Many cities have around 15-25 AQI score
-    
-    """)  
-row7_spacer1, row7_1, row7_spacer2 = st.columns((.2, 7.1, .2))
-with row7_1:
+    """)
+
+
+
+row8_spacer1, row8_1, row8_spacer2 = st.columns((.2, 7.1, .2))
+with row8_1:
     # line plot with plotly express
     df_aqicty_indo_line = df_aqicty_indo.copy()
 
@@ -302,11 +335,125 @@ with row7_1:
     fig.update_layout(margin=dict(t=40, b=10))
     st.plotly_chart(fig, use_container_width=True)
     st.markdown("""
-        **Keypoints Viz2**
-
         * Jakarta have overall high AQI with highest on July with 57.2
         * Pontianak has staggering rise of 86.2 AQI on November yet followed by inverse effect in cities like Bandung, Jakarta, Serang, and Jambi
         * Indralaya experienced healthy fall of AQI after March by almost 40 points
     """)    
 
 
+#############################################################
+# 02. Air Quality in Yogyakarta, Indonesia.ipynb
+#############################################################
+
+row9_spacer1, row9_1, row9_spacer2 = st.columns((.2, 7.1, .2))
+with row9_1:
+    st.subheader('Air Quality Category and Critical Component')
+    st.markdown('')
+
+categoricals = ['Critical Component',	'Category']
+
+numericals = ['PM10',	'SO2',	'CO',	'O3',	'NO2',	'Max']
+
+df_catagg = df.copy()
+df_catagg = df_catagg.groupby(["Category"])[["Category"]].count()
+df_catagg.rename(columns={"Category": "count"}, inplace=True)
+df_catagg.reset_index(inplace=True)
+df_catagg = df_catagg.reset_index(drop=True).rename_axis(None, axis=1)
+df_catagg =  df_catagg.sort_values(by="count", ascending=False)
+
+df_critagg = df.copy()
+df_critagg = df_critagg.groupby(["Critical Component"])[["Critical Component"]].count()
+df_critagg.rename(columns={"Critical Component": "count"}, inplace=True)
+df_critagg.reset_index(inplace=True)
+df_critagg = df_critagg.reset_index(drop=True).rename_axis(None, axis=1)
+df_critagg =  df_critagg.sort_values(by="count", ascending=False)
+
+row10_spacer1, row10_1, row10_spacer2 = st.columns((.2, 7.1, .2))
+with row10_1:
+    fig = make_subplots(rows=1, cols=2)
+
+    fig.add_trace(
+        go.Bar(x=df_catagg["Category"], y=df_catagg["count"], text=df_catagg["count"],
+                        marker_color=["green", "orange", "red"]),
+                1, 1
+    )
+
+    fig.add_trace(
+        go.Bar(x=df_critagg["Critical Component"], y=df_critagg["count"], text=df_critagg["count"],
+                        marker_color=px.colors.qualitative.G10),
+                1, 2
+    )
+
+    fig.update_layout(height=300, width=800, title_text="Number of Categories and Critical Components", showlegend=False,)
+    fig.update_layout(margin=dict(t=40, b=10))
+    st.plotly_chart(fig, use_container_width=True)
+
+    # ------------------------------------------------------------
+    
+    fig = go.Figure()
+
+    features = numericals
+    for i in range(0, len(features)):
+
+        fig.add_trace(go.Box(
+            y=df[features[i]],
+            name=features[i],
+            boxpoints='suspectedoutliers', # only suspected outliers
+            marker=dict(
+                color='rgb(8,81,156)',
+                outliercolor='rgba(219, 64, 82, 0.6)',
+                line=dict(
+                    outliercolor='rgba(219, 64, 82, 0.6)',
+                    outlierwidth=2)),
+            line_color='rgb(8,81,156)'
+        ))
+
+
+    fig.update_layout(title_text="Box Plot Styling Outliers")
+    fig.layout.plot_bgcolor = "light grey"
+    fig.update_layout(margin=dict(t=40, b=10))
+    st.plotly_chart(fig, use_container_width=True)   
+
+
+row11_spacer1, row11_1, row11_spacer2, row11_2, row11_spacer3  = st.columns((.2, 4.4, 0.1, 4.4, .2))
+with row11_1:
+    st.markdown("""
+        **Observation:**
+        * There are 3 air qualities in the data
+        * Good air quality is the highest air quality detected in 2020 in Yogyakarta at 80%
+        * Seen less/unhealthy air quality, too small in 2020
+        * CO, O3 and PM10 dominate the category in terms of critical value
+    """) 
+with row11_2:
+    st.markdown("""
+        **Observations:**
+         * It can be seen that there are outliers detected in some columns
+         * Except for column NO2, because it contains only 0 (zero) data
+         * However, this oulier data will not be discarded because we want to know the quality of the air produced
+    """)
+
+
+row12_spacer1, row12_1, row12_spacer2 = st.columns((.2, 7.1, .2))
+with row12_1:
+    x_axis_val = row12_1.selectbox('Select the Critical Components', options=numericals)
+
+    plot = px.histogram(df.sort_values("Category"), x=x_axis_val, color="Category", 
+                   facet_col="Category",
+                   color_discrete_sequence=["green", "orange", "red"],
+                   title="Distribution of {} values to Category".format(x_axis_val))
+
+    plot.update_layout(margin=dict(t=60, b=10))
+    plot.layout.plot_bgcolor = "light grey"
+    st.plotly_chart(plot, use_container_width=True)
+
+row13_spacer1, row13_1, row13_spacer2 = st.columns((.2, 7.1, .2))
+with row13_1:
+    x_axis_val = row13_1.selectbox('Select the X-axis', options=numericals, index=2)
+    y_axis_val = row13_1.selectbox('Select the Y-axis', options=numericals, index=1)
+
+    fig = px.scatter(df.sort_values("Category"), x=x_axis_val, y=y_axis_val, color="Category",
+                    color_discrete_sequence=["green", "orange", "red"],
+                    title="Correlation Category between {} dan {}".format(x_axis_val, y_axis_val))
+    fig.update_layout(margin=dict(t=60, b=10))
+    fig.layout.plot_bgcolor = "light grey"
+    st.plotly_chart(fig, use_container_width=True)
