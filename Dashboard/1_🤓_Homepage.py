@@ -80,7 +80,7 @@ with row1_1:
 # Load Data
 import os
 d = os.path.dirname(os.getcwd())
-print("tandaa"+d)
+st.markdown(d)
 # Clean - AIR QUALITY INDEX (by cities).csv
 # df_aqicty = pd.read_csv("https://drive.google.com/uc?id=1V086i1eHdM08nk67F4l2D7_bj-ZJk8PY")
 df_aqicty = pd.read_csv(d+"/data/Most Polluted Cities and Countries (IQAir Index)/Clean - AIR QUALITY INDEX (by cities).csv")
