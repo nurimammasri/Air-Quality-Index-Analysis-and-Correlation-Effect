@@ -9,8 +9,6 @@ import plotly.graph_objs as go
 import plotly.offline as pyoff
 import warnings # Ignores any warning
 warnings.filterwarnings("ignore")
-plt.style.use('seaborn')
-sns.set(rc={'figure.figsize':(15, 8)})
 pd.set_option('display.max_columns', None)
 
 
@@ -71,10 +69,6 @@ with row1_1:
 ### ANALYSIS ###
 ################
 
-#############################################################
-# 01. Most Polluted Cities and Countries (IQAir Index).ipynb
-#############################################################
-
 ### DATA EXPLORER ###
 
 # Load Data
@@ -84,7 +78,7 @@ with row1_1:
 df_aqicty = pd.read_csv("../data/Most Polluted Cities and Countries (IQAir Index)/Clean - AIR QUALITY INDEX (by cities).csv")
 
 # Clean - AIR QUALITY INDEX- top countries.csv
-# df_aqitpcr = pd.read_csv("https://drive.google.com/uc?id=11qjUGvAQiqEgfPWW8USMz6rHlARcrL_P")
+# df_aqitpcr = pd.read_csv("http s://drive.google.com/uc?id=11qjUGvAQiqEgfPWW8USMz6rHlARcrL_P")
 df_aqitpcr = pd.read_csv("../data/Most Polluted Cities and Countries (IQAir Index)/Clean - AIR QUALITY INDEX- top countries.csv")
 
 # Clean - pollutant-standards-index-jogja-2020.csv
@@ -165,8 +159,154 @@ with row2_1:
         st.dataframe(data=df_penduduk_all.reset_index(drop=True))
 st.text('')
 
+#############################################################
+# 01. Most Polluted Cities and Countries (IQAir Index).ipynb
+#############################################################
+
 row3_spacer1, row3_1, row3_spacer2 = st.columns((.2, 7.1, .2))
 with row3_1:
     st.subheader('Most Polluted Cities and Countries (IQAir Index)')
-    st.markdown('Show the (or a) match with the...')  
+    st.markdown('')
+
+row4_spacer1, row4_1, row4_spacer2, row4_2, row4_spacer3  = st.columns((.2, 4.4, 0.1, 6.4, .2))
+with row4_1:
+    ### Top 10 Polluted Country In World ###
+    top_10_country = df_aqitpcr.head(20).copy()
+    top_10_country['Rank'] = 21-top_10_country['Rank']
+    fig1= px.bar(top_10_country, y='Country/Region', 
+                x='Rank', color='2021',
+                title="Top 10 Polluted Country In World",
+                text='2021',
+                height=600)
+    fig1.layout.plot_bgcolor = "white"
+    fig1.update_layout(margin=dict(t=40, b=10))
+    fig1.update_xaxes(visible=False, showticklabels=False)
+    st.plotly_chart(fig1, use_container_width=True)
+with row4_2:
+    top_10_country = df_aqitpcr.head(17).copy().iloc[11:18,:]
+    top_10_country['Rank'] = 18-top_10_country['Rank']
+
+    # Deleting unnecesary Columns
+    top_10_country.drop(['Population'], axis=1, inplace=True)
+
+    # Converting wide to long format
+    top_10_country = top_10_country.melt(id_vars=['Rank', 'Country/Region'],
+                                var_name="Year", 
+                                value_name="AQI")
+                                
+    top_10_country.sort_values(['Rank','Year'], ascending=[False, True], inplace=True)
+    top_10_country['AQI'] = top_10_country['AQI'].astype(float)
+
+
+    # For Plotting purose filling missing values with the backfill process
+    top_10_country.fillna(method="bfill", inplace=True)
+
+    fig2= px.line(top_10_country, y='AQI', 
+                x='Year',
+                color='Country/Region',
+                title="Top 11-17 Yearly Air Quality Index", 
+                symbol='Country/Region',
+                text="AQI")
+    fig2.for_each_trace(lambda t: t.update(textfont_color="black", textposition='top right'))
+    fig2.layout.plot_bgcolor = "light grey"
+    fig2.update_yaxes(visible=False, showticklabels=False, )
+    fig2.update_layout(margin=dict(t=40, b=10))
+    st.plotly_chart(fig2, use_container_width=True)
+    st.markdown('Investigate a variety of stats for each team. Which team scores the most goals per game? How does your team compare in terms of distance ran per game?')    
+   
+
+
+def human_format(num):
+    magnitude = 0
+    while abs(num) >= 1000:
+        magnitude += 1
+        num /= 1000.0
+    # add more suffixes if you need them
+    return '%.1f%s' % (num, ['', 'K', 'M', 'B', 'T', 'P'][magnitude])
     
+row5_spacer1, row5_1, row5_spacer2, row5_2, row5_spacer3  = st.columns((.2, 6.4, 0.1, 4.4, .2))
+with row5_1:
+    top_10_country = df_aqitpcr.sort_values(['Population'], ascending=False).head(10).copy()
+    top_10_country["text"] = top_10_country["Population"].apply(lambda x: human_format(x))
+    fig1= px.bar(top_10_country, 
+                x="Country/Region",
+                y="Population", 
+                color='Country/Region',
+                text="text",
+                title="Top 10 Population Country In World")
+    fig1.layout.plot_bgcolor = "white"
+    fig1.update_layout(margin=dict(t=40, b=10))
+    st.plotly_chart(fig1, use_container_width=True)
+with row5_2:
+    st.markdown('Investigate a variety of stats for each team. Which team scores the most goals per game? How does your team compare in terms of distance ran per game?')    
+
+
+# Get Indonesia Data
+
+# select city in Indonesia
+df_aqicty_indo = df_aqicty.loc[df_aqicty['country'] == 'Indonesia'].reset_index(drop=True)
+
+# select country = Indonesia
+df_aqitpcr_indo = df_aqitpcr.loc[df_aqitpcr['Country/Region'] == "Indonesia"].reset_index(drop=True)
+
+row6_spacer1, row6_1, row6_spacer2 = st.columns((.2, 7.1, .2))
+with row6_1:
+    df_aqicty_indo_bar = df_aqicty_indo.copy()
+    labels = df_aqicty_indo_bar['city_only']
+    fig = go.Figure(data=[
+        go.Bar(name="2021", x=labels, y=df_aqicty_indo_bar['2021'], text=df_aqicty_indo_bar['2021']),
+        go.Bar(name="2020", x=labels, y=df_aqicty_indo_bar['2020'], text=df_aqicty_indo_bar['2020']),
+        go.Bar(name="2019", x=labels, y=df_aqicty_indo_bar['2019'], text=df_aqicty_indo_bar['2019'])
+    ])
+
+    # Change the bar mode
+    fig.update_layout(title_text='Indonesia Average Air Quality Index by City (3 Years)')
+    # fig.update_layout(barmode='stack', xaxis={'categoryorder':'total descending'})
+    fig.update_layout(barmode='stack')
+    fig.update_layout(margin=dict(t=40, b=10))
+    fig.for_each_trace(lambda t: t.update(textfont_color="white"))
+    st.plotly_chart(fig, use_container_width=True)
+    st.markdown("""
+        **Keypoints Viz1**
+
+        * Overall, air pollution has gone down in the last 4 years being year 2021 to be the lowest 
+        * Jakarta has highest average AQI score with 39.2 
+        * Indralaya in South Sumatra has lowest score with 4.2 
+        * 4 out of 5 highest polluted cities is in Java 
+        * Lowest 5 polluted cities located in Sumatra and Kalimantan Many cities have around 15-25 AQI score
+    
+    """)  
+row7_spacer1, row7_1, row7_spacer2 = st.columns((.2, 7.1, .2))
+with row7_1:
+    # line plot with plotly express
+    df_aqicty_indo_line = df_aqicty_indo.copy()
+
+    # dropping unused columns
+    df_aqicty_indo_line.drop(['2021', '2020', '2019', '2018', '2017', 'country', 'city_only'],
+                    axis=1, inplace=True)
+
+    # converting wide to long format
+    df_aqicty_indo_line = df_aqicty_indo_line.melt(id_vars = ['Rank', 'City'],
+                                var_name = "Month", 
+                                value_name = "Air Quality Index")
+
+    # filling missing values with the backfill process
+    df_aqicty_indo_line.fillna(method="bfill", inplace=True)
+
+    fig= px.line(df_aqicty_indo_line, y = 'Air Quality Index', 
+                labels = { 'Air Quality Index': 'AQI'}, 
+                x = 'Month', color = 'City',
+                title = "Monthly Air Quality Index 2021")
+    fig.layout.plot_bgcolor = "light grey"
+    
+    fig.update_layout(margin=dict(t=40, b=10))
+    st.plotly_chart(fig, use_container_width=True)
+    st.markdown("""
+        **Keypoints Viz2**
+
+        * Jakarta have overall high AQI with highest on July with 57.2
+        * Pontianak has staggering rise of 86.2 AQI on November yet followed by inverse effect in cities like Bandung, Jakarta, Serang, and Jambi
+        * Indralaya experienced healthy fall of AQI after March by almost 40 points
+    """)    
+
+
