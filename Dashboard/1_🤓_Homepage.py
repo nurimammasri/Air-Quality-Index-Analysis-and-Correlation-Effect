@@ -32,7 +32,7 @@ st.set_page_config(
 
 row0_spacer1, row0_1, row0_spacer2, row0_2, row0_spacer3 = st.columns((.1, 2.3, .1, 1.3, .1))
 with row0_1:
-    st.title('Air Quality Index Analysis and Correlation Effect')
+    st.title('Air Quality Index Analysis and Correlation Effect ⛅🏝🍃')
 with row0_2:
     st.text("")
     st.subheader('Streamlit App by [Nur Imam Masri](https://www.linkedin.com/in/nurimammasri/)')
@@ -165,6 +165,8 @@ with row2_1:
         st.dataframe(data=df_penduduk_all.reset_index(drop=True))
 st.text('')
 
+
+
 #############################################################
 # 01. Most Polluted Cities and Countries (IQAir Index).ipynb
 #############################################################
@@ -279,6 +281,64 @@ df_aqicty_indo = df_aqicty.loc[df_aqicty['country'] == 'Indonesia'].reset_index(
 
 # select country = Indonesia
 df_aqitpcr_indo = df_aqitpcr.loc[df_aqitpcr['Country/Region'] == "Indonesia"].reset_index(drop=True)
+
+
+
+
+#############################################################
+# 04. Additional Data.ipynb
+#############################################################
+
+def human_format(num):
+    magnitude = 0
+    while abs(num) >= 1000:
+        magnitude += 1
+        num /= 1000.0
+    # add more suffixes if you need them
+    return '%.1f%s' % (num, ['', 'K', 'M', 'B', 'T', 'P'][magnitude])
+
+row22_spacer1, row22_1, row22_spacer2, row22_2, row22_spacer3  = st.columns((.2, 6.4, 0.1, 6.4, .2))
+with row22_1:
+    df_kendaraan2 = df_kendaraan.copy()
+    df_kendaraan2 = df_kendaraan2.melt(id_vars='Year', value_vars=["Mobil Penumpang", "Mobil Bis", "Mobil Barang", "Sepeda motor", "Jumlah"],
+                                    var_name='Jenis', value_name='Jumlah')
+
+    df_kendaraan2["text"] = df_kendaraan2["Jumlah"].apply(lambda x: human_format(x))
+    df_kendaraan2["Jenis"] = df_kendaraan2["Jenis"].apply(lambda x: "Total" if x == "Jumlah" else x)
+
+    fig2= px.line(df_kendaraan2, y='Jumlah', 
+                x='Year',
+                color='Jenis',
+                title="Number of Vehicles in Indonesia", 
+                symbol='Jenis',
+                text="text")
+
+    fig2.for_each_trace(lambda t: t.update(textfont_color="black", textposition='bottom right'))
+    fig2.layout.plot_bgcolor = "light grey"
+    fig2.update_layout(margin=dict(t=40, b=10))
+    st.plotly_chart(fig2, use_container_width=True)
+with row22_2:
+    df_kendaraan_prov2 = df_kendaraan_prov[["Year", "Province", "Jumlah"]].copy()
+    df_kendaraan_prov2 = df_kendaraan_prov2.sort_values("Jumlah", ascending=False).reset_index(drop=True)
+    df_kendaraan_prov2 = df_kendaraan_prov2[(df_kendaraan_prov2["Province"] != "Indonesia") & (df_kendaraan_prov2["Year"] == 2021)].reset_index(drop=True)
+    df_kendaraan_prov2["text"] = df_kendaraan_prov2["Jumlah"].apply(lambda x: human_format(x))
+
+    fig = px.bar(df_kendaraan_prov2.head(10), 
+                x = 'Province',
+                y = 'Jumlah', 
+                labels = {'Province': 'Province'}, 
+                color = 'Jumlah', 
+                text = 'text',
+                title = "Indonesia Vehicles by Province",
+                height=470
+    )
+
+    # plot background white
+    fig.layout.plot_bgcolor = "white"
+    fig.update_layout(margin=dict(t=40, b=10))
+    st.plotly_chart(fig, use_container_width=True)
+
+
 
 row6_spacer1, row6_1, row6_spacer2 = st.columns((.2, 7.1, .2))
 with row6_1:
@@ -501,3 +561,318 @@ with row13_2:
     
     fig.update_layout(margin=dict(t=60, b=10))
     st.plotly_chart(fig, use_container_width=True)
+
+
+
+
+#############################################################
+# 03. Co2 Emissions and Economic.ipynb
+#############################################################
+
+row14_spacer1, row14_1, row14_spacer2 = st.columns((.2, 7.1, .2))
+with row14_1:
+    st.subheader('CO2 Emissions and Economic')
+    st.markdown('')
+
+# DATA CLEANING
+gdp.rename(columns={"Country Name":"Country"}, inplace=True)
+
+co2pc.rename(columns={
+    "Value":"Co2_p",
+    "Attribute":"Year",
+    "Country Name":"Country"
+}, inplace=True)
+
+gco_join = gdp.merge(co2pc, how='inner', on=['Country', 'Year'])
+
+energygb = elecdt.groupby("Year").agg({
+    "Fossil_Energy":"sum",
+    "Nuclear_Energy":"sum",
+    "Renewable_Electricity":"sum"
+}).reset_index()
+
+energy = pd.melt(energygb, id_vars=['Year'], value_vars=['Fossil_Energy', 'Nuclear_Energy','Renewable_Electricity'],
+        var_name='Energy Type', value_name='Energy').sort_values(["Year","Energy Type"]).reset_index(drop=True)
+
+co2ann.rename(columns={'Annual CO2 emissions (zero filled)':"Co2Emissions"}, inplace=True)
+
+co2ann = co2ann.groupby("Year").agg({
+    "Co2Emissions":"sum"
+}).reset_index()
+
+co2ann = co2ann[co2ann["Year"]>=1900]
+
+# VISUALIZATION
+
+row14_spacer1, row14_1, row14_spacer2, row14_2, row14_spacer3  = st.columns((.2, 6.4, 0.1, 6.4, .2))
+with row14_1:
+    # Generated Electricity (TW) 1985- 2020
+    fig = px.area(energy, x="Year", y="Energy", color="Energy Type", line_group="Energy Type")
+
+    fig.update_layout(title='Generated Electricity (TW) 1985- 2020',
+                    xaxis_title='Year',
+                    yaxis_title='Generated Electricity (TW)')
+
+    fig.update_layout(margin=dict(t=60, b=10))
+    fig.layout.plot_bgcolor = "light grey"
+    st.plotly_chart(fig, use_container_width=True)
+
+with row14_2:
+    # Annual Global Co2 Emissions from fossil fuel 1900-2020
+    fig = px.area(co2ann, x="Year", y="Co2Emissions")
+
+    fig.update_layout(title='Annual Global Co2 Emissions from fossil fuel 1900-2020',
+                    xaxis_title='Year',
+                    yaxis_title='CO2 Emissions')
+    fig.update_layout(margin=dict(t=60, b=10))
+    fig.layout.plot_bgcolor = "light grey"
+    st.plotly_chart(fig, use_container_width=True)
+
+
+row15_spacer1, row15_1, row15_spacer2  = st.columns((.2, 7.1, .2))
+with row15_1:
+    st.markdown("""
+        **Fossil fuel** has been the world’s primary source of **electricity**.
+
+        The majority or 50% of the installed capacity of power plants in Indonesia still comes from fossil energy. The need for electrical energy from year to year continues to increase in line with the increasing rate of economic growth, population, and the development of the industrial sector. 
+        
+        The use of fossil energy will produce waste in the form of CO2 gas which causes infrared radiation from the earth to return to the earth's surface so that it can cause global warming. In addition, the use of fossil energy as the main source of power generation can also result in depletion of natural resource reserves, such as oil, coal, and gas.
+    """)
+
+
+# Annual GDP Vs Co2 Emissions Per Capita
+
+row16_spacer1, row16_1, row16_spacer2 = st.columns((.2, 7.1, .2))
+with row16_1:
+    st.markdown('### **Carbon Tax**')
+    st.markdown('**Carbon tax** is a tax levied on the burning of carbon-based fuels such as coal, oil and gas. The carbon tax is a core policy created to reduce and eliminate the use of fossil fuels whose burning can damage the climate.')
+
+
+new_gco_join = gco_join.copy()
+
+# United Kingdom
+new_gco_join["Co2_p_uk"] = new_gco_join["Co2_p"]*4000
+new_gco_join["Co2_p_uk"] = new_gco_join["Co2_p_uk"].round(decimals = 2)
+
+# Sweden
+new_gco_join["Co2_p_sw"] = new_gco_join["Co2_p"]*4500
+new_gco_join["Co2_p_sw"] = new_gco_join["Co2_p_sw"].round(decimals = 2)
+
+# Indonesia
+new_gco_join["Co2_p_indo"] = new_gco_join["Co2_p"]*2000
+new_gco_join["Co2_p_indo"] = new_gco_join["Co2_p_indo"].round(decimals = 2)
+
+# India
+new_gco_join["Co2_p_india"] = new_gco_join["Co2_p"]*1000
+new_gco_join["Co2_p_india"] = new_gco_join["Co2_p_india"].round(decimals = 2)
+
+
+
+row17_spacer1, row17_1, row17_spacer2, row17_2, row17_spacer3  = st.columns((.2, 6.4, 0.1, 6.4, .2))
+with row17_1:
+    # Annual GDP Vs Co2 Emissions Per Capita In the United Kingdom
+    gco_uk = new_gco_join[(new_gco_join["Country"] =="United Kingdom") & (new_gco_join["Year"] > 1990)]
+
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x=gco_uk["Year"], y=gco_uk["Co2_p_uk"],
+                        mode='lines+markers',
+                        name='CO2/Capita'))
+    fig.add_trace(go.Scatter(x=gco_uk["Year"], y=gco_uk["GDP"],
+                        mode='lines+markers',
+                        name='GDP/Capita'))
+
+    # Edit the layout
+    fig.update_layout(title='Annual GDP Vs Co2 Emissions Per Capita In the United Kingdom',
+                    xaxis_title='Year',
+                    yaxis_title='GDP/Capita')
+    fig.add_annotation(x=2003.2, y=36500,
+                text="EU ETS, 2005*",
+                showarrow=True,arrowcolor="#636363",
+                ax=-30,
+                ay=-90,
+                bordercolor="#c7c7c7",
+                borderwidth=2,
+                borderpad=4,
+                bgcolor="#ff7f0e",
+                opacity=0.8,
+                arrowhead=7)
+
+    fig.add_annotation(x=2013, y=44000,
+                text="UK CPS, 2013**",
+                showarrow=True,arrowcolor="#636363",
+                ax=-30,
+                ay=-90,
+                bordercolor="#c7c7c7",
+                borderwidth=2,
+                borderpad=4,
+                bgcolor="#ff7f0e",
+                opacity=0.8,
+                arrowhead=7)
+
+    fig.update_layout(
+            xaxis=go.layout.XAxis(
+            title=go.layout.xaxis.Title(
+                text="""
+                Year
+                <br><br><sup>*The European Union Emissions Trading System (EU ETS) is a  form of Carbon Pricing.</sup>
+                <br><sup>** UK Carbon Price Support (CPS) is an additonal form of Carbon Pricing.</sup>
+                <br><sup>Correlation Coefficient = -0.889 (Strong Negative Correlation)</sup>
+                """
+                )
+            )
+        )
+
+    fig.update_layout(margin=dict(t=60, b=10))
+    fig.layout.plot_bgcolor = "light grey"
+    st.plotly_chart(fig, use_container_width=True)
+
+with row17_2:
+    # Annual GDP Vs Co2 Emissions Per Capita in Sweden
+    gco_sw = new_gco_join[(new_gco_join["Country"] =="Sweden") & (new_gco_join["Year"] > 1975)]
+
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x=gco_sw["Year"], y=gco_sw["Co2_p_sw"],
+                        mode='lines+markers',
+                        name='CO2/Capita'))
+    fig.add_trace(go.Scatter(x=gco_sw["Year"], y=gco_sw["GDP"],
+                        mode='lines+markers',
+                        name='GDP/Capita'))
+
+    # Edit the layout
+    fig.update_layout(title='Annual GDP Vs Co2 Emissions Per Capita In the Sweden',
+                    xaxis_title='Year',
+                    yaxis_title='GDP/Capita')
+
+    fig.add_annotation(x=1991, y=28000,
+                text="Carbon Tax, 1991*",
+                showarrow=True,arrowcolor="#636363",
+                ax=0,
+                ay=-90,
+                bordercolor="#c7c7c7",
+                borderwidth=2,
+                borderpad=4,
+                bgcolor="#ff7f0e",
+                opacity=0.8,
+                arrowhead=1)
+
+    fig.update_layout(
+            xaxis=go.layout.XAxis(
+            title=go.layout.xaxis.Title(
+                text="""
+                Year
+                <br><br><sup>*Carbon Tax Implementation Started on 1991
+                <br>Correlation Coefficient = -0.829 (Strong Negative Correlation)</sup>
+                """
+                )
+            )
+        )
+
+    fig.update_layout(margin=dict(t=60, b=10))
+    fig.layout.plot_bgcolor = "light grey"
+    st.plotly_chart(fig, use_container_width=True)
+
+
+row18_spacer1, row18_1, row18_spacer2 = st.columns((.2, 7.1, .2))
+with row18_1:
+    st.markdown("""
+    **Summary** : After Implementation of ***Carbon Tax***, *UK* and *Sweden* Experience Increased Economic Activity (GDP) 👍 and Decreased Carbon Emissions 🔻
+    
+    Some 40 countries and more than 20 cities, states and provinces already use carbon pricing mechanisms, with more planning to implement them in the future.
+    https://www.worldbank.org/en/programs/pricing-carbon
+    """)
+
+
+
+row19_spacer1, row19_1, row19_spacer2 = st.columns((.2, 7.1, .2))
+with row19_1:
+    st.markdown('### **No Carbon Tax**')
+
+
+row20_spacer1, row20_1, row20_spacer2, row20_2, row20_spacer3  = st.columns((.2, 6.4, 0.1, 6.4, .2))
+with row20_1:
+    # Annual GDP Vs Co2 Emissions Per Capita in Indonesia
+    gco_indo = new_gco_join[(new_gco_join["Country"] =="Indonesia") & (new_gco_join["Year"] > 1990)]
+
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x=gco_indo["Year"], y=gco_indo["Co2_p_indo"],
+                        mode='lines+markers',
+                        name='CO2/Capita'))
+    fig.add_trace(go.Scatter(x=gco_indo["Year"], y=gco_indo["GDP"],
+                        mode='lines+markers',
+                        name='GDP/Capita'))
+
+    # Edit the layout
+    fig.update_layout(title='Annual GDP Vs Co2 Emissions Per Capita In the Indonesia',
+                    xaxis_title='Year',
+                    yaxis_title='GDP/Capita')
+
+    fig.update_layout(
+            xaxis=go.layout.XAxis(
+            title=go.layout.xaxis.Title(
+                text="""
+                Year
+                <br><br><sup>Correlation Coefficient is 0.9001 which proves strong</sup>
+                <br><sup>positive correlation  for GDP and Co2 Emissions in Indonesia.</sup>
+                """
+                )
+            )
+        )
+
+    fig.update_layout(margin=dict(t=60, b=10))
+    fig.layout.plot_bgcolor = "light grey"
+    st.plotly_chart(fig, use_container_width=True)
+
+with row20_2:
+    # Annual GDP Vs Co2 Emissions Per Capita in India
+    gco_india = new_gco_join[(new_gco_join["Country"] =="India") & (new_gco_join["Year"] > 1990)]
+
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x=gco_india["Year"], y=gco_india["Co2_p_india"],
+                        mode='lines+markers',
+                        name='CO2/Capita'))
+    fig.add_trace(go.Scatter(x=gco_india["Year"], y=gco_india["GDP"],
+                        mode='lines+markers',
+                        name='GDP/Capita'))
+
+    # Edit the layout
+    fig.update_layout(title='Annual GDP Vs Co2 Emissions Per Capita In the India',
+                    xaxis_title='Year',
+                    yaxis_title='GDP/Capita')
+
+    fig.update_layout(
+            xaxis=go.layout.XAxis(
+            title=go.layout.xaxis.Title(
+                text="""
+                Year
+                <br><br><sup>Correlation Coefficient is 0.972 which proves</sup>
+                <br><sup>strong positive correlation for GDP and Co2 Emissions in India</sup>
+                """
+                )
+            )
+        )
+
+    fig.update_layout(margin=dict(t=60, b=10))
+    fig.layout.plot_bgcolor = "light grey"
+    st.plotly_chart(fig, use_container_width=True)
+
+row21_spacer1, row21_1, row21_spacer2 = st.columns((.2, 7.1, .2))
+with row21_1:
+    st.markdown("""
+    **Summary** : After seeing the increase in the value of Indonesia and India, Compared to the UK and Sweden which implemented the Carbon Tax, **India and Indonesia's Carbon Emissions increased also related to the increase**
+    Putting a price on carbon can encourage low-carbon growth and lower greenhouse gas emissions. Putting a Price Tag on Carbon Reduces Carbon Emission and Supports Economic Growth.
+    """)
+
+
+st.markdown('***')
+## Find me and let's connect 
+html_string = """## Find me
+<p>
+  <a href="https://www.linkedin.com/in/nurimammasri/" target="_blank"><img alt="LinkedIn" src="https://img.shields.io/badge/linkedin-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white" /></a>  
+  <a href="https://www.instagram.com/nurimammasri" target="_blank"><img alt="Instagram" src="https://img.shields.io/badge/instagram-%23E4405F.svg?&style=for-the-badge&logo=instagram&logoColor=white" /></a> 
+  <a href="mailto:nurimammasri.01@gmail.com" target="_blank"><img alt="Gmail" src="https://img.shields.io/badge/gmail-D14836?&style=for-the-badge&logo=gmail&logoColor=white"/></a> 
+  <a href="https://medium.com/@nurimammasri" target="_blank"><img alt="Medium" src="https://img.shields.io/badge/medium-%2312100E.svg?&style=for-the-badge&logo=medium&logoColor=white" /></a>  
+  <a href="https://github.com/nurimammasri" target="_blank"><img alt="Github" src="https://img.shields.io/github/followers/nurimammasri?style=social" /></a>  
+  
+</p>
+"""
+st.markdown(html_string, unsafe_allow_html=True)
