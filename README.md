@@ -1,5 +1,3 @@
-# Air Quality Index Analysis and Correlation Effect
-
 <h1 align="center">
   <img align="center" src="/image/logo.jpg"  width="270"></img>
 <br>
