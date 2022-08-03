@@ -35,7 +35,7 @@ CO2 - Carbon Diaoksida
 
 Both human activity and natural processes can generate air pollution.
 
-<img align="center" src="/image/Air Quality Index - Particulate Matter.png"  width="350"></img>
+<img align="center" src="/image/Air Quality Index - Particulate Matter.png" width="350" align=center></img>
 
 The population of Indonesia has increased from time to time. The increase in population has a negative impact on the environment. the availability of green land as a source of clean air in urban areas is also reduced due to the many existing green lands being converted as settlements. Thus it can be said that an increase in population can lead to reduced availability of clean air. The reduced availability of clean air can also be caused by air pollution due to motor vehicle fumes.
 
