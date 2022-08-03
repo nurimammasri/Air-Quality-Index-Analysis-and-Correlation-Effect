@@ -78,10 +78,11 @@ with row1_1:
 ### DATA EXPLORER ###
 
 # Load Data
-
+import os
 # Clean - AIR QUALITY INDEX (by cities).csv
 # df_aqicty = pd.read_csv("https://drive.google.com/uc?id=1V086i1eHdM08nk67F4l2D7_bj-ZJk8PY")
-df_aqicty = pd.read_csv("/../data/Most Polluted Cities and Countries (IQAir Index)/Clean - AIR QUALITY INDEX (by cities).csv")
+l = os.listdir("../data/Most Polluted Cities and Countries (IQAir Index)/Clean - AIR QUALITY INDEX (by cities).csv")
+df_aqicty = pd.read_csv(l)
 
 # Clean - AIR QUALITY INDEX- top countries.csv
 # df_aqitpcr = pd.read_csv("http s://drive.google.com/uc?id=11qjUGvAQiqEgfPWW8USMz6rHlARcrL_P")
