@@ -4,6 +4,8 @@
 Air Quality Index Analysis and Correlation Effect
 </h1>
 
+This is the Capstone Project of the Tetris 2.0 Program
+
 ## **Air pollution**
 
 Air pollution is `the contamination of air due to the presence of substances in the atmosphere that are harmful to the health of humans and other living beings, or cause damage to the climate or to materials. `
