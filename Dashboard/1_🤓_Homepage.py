@@ -78,46 +78,46 @@ with row1_1:
 ### DATA EXPLORER ###
 
 # Load Data
-
+parent = "/app/air-quality-index-analysis-and-correlation-effect"
 # Clean - AIR QUALITY INDEX (by cities).csv
 # df_aqicty = pd.read_csv("https://drive.google.com/uc?id=1V086i1eHdM08nk67F4l2D7_bj-ZJk8PY")
-df_aqicty = pd.read_csv("/app/air-quality-index-analysis-and-correlation-effect/data/Most Polluted Cities and Countries (IQAir Index)/Clean - AIR QUALITY INDEX (by cities).csv")
+df_aqicty = pd.read_csv("/data/Most Polluted Cities and Countries (IQAir Index)/Clean - AIR QUALITY INDEX (by cities).csv")
 
 # Clean - AIR QUALITY INDEX- top countries.csv
 # df_aqitpcr = pd.read_csv("http s://drive.google.com/uc?id=11qjUGvAQiqEgfPWW8USMz6rHlARcrL_P")
-df_aqitpcr = pd.read_csv("../data/Most Polluted Cities and Countries (IQAir Index)/Clean - AIR QUALITY INDEX- top countries.csv")
+df_aqitpcr = pd.read_csv("/data/Most Polluted Cities and Countries (IQAir Index)/Clean - AIR QUALITY INDEX- top countries.csv")
 
 # Clean - pollutant-standards-index-jogja-2020.csv
 # df = pd.read_csv("https://drive.google.com/uc?id=1BpMqLEYmGRuOAIyzEsx_-XXdxF5b_1vR")
-df = pd.read_csv("../data/Air Quality in Yogyakarta, Indonesia/Clean - pollutant-standards-index-jogja-2020.csv")
+df = pd.read_csv("/data/Air Quality in Yogyakarta, Indonesia/Clean - pollutant-standards-index-jogja-2020.csv")
 
 # GDPPerCapita.csv
 # gdp = pd.read_csv("https://drive.google.com/uc?id=1rBgi4F_R9EhYerayeFvaRaRCPQV6N_IY")
-gdp = pd.read_csv("../data/Co2 Emissions and Economic/GDPPerCapita.csv")
+gdp = pd.read_csv("/data/Co2 Emissions and Economic/GDPPerCapita.csv")
 
 # CO2EmissionsPerCapita.csv
 # co2pc = pd.read_csv("https://drive.google.com/uc?id=136cdpMhIX_WKyg5A_FKAjdDspog_Rc7p")
-co2pc = pd.read_csv("../data/Co2 Emissions and Economic/CO2EmissionsPerCapita.csv")
+co2pc = pd.read_csv("/data/Co2 Emissions and Economic/CO2EmissionsPerCapita.csv")
 
 # ElectricityGeneratedYear.csv
 # elecdt = pd.read_csv("https://drive.google.com/uc?id=1f3LClVnVBSjExxdvsl5wSQBv3jwxF1G-")
-elecdt = pd.read_csv("../data/Co2 Emissions and Economic/ElectricityGeneratedYear.csv")
+elecdt = pd.read_csv("/data/Co2 Emissions and Economic/ElectricityGeneratedYear.csv")
 
 # AnnualCOEmissionsbyRegion.csv
 # co2ann = pd.read_csv("https://drive.google.com/uc?id=1LDi87mDkdnCkl6DN_CqZw9NZprYQGUch")
-co2ann = pd.read_csv("../data/Co2 Emissions and Economic/AnnualCOEmissionsbyRegion.csv")
+co2ann = pd.read_csv("/data/Co2 Emissions and Economic/AnnualCOEmissionsbyRegion.csv")
 
 # jumlah_kendaraan_bermotor.csv
 # df_kendaraan = pd.read_csv("https://drive.google.com/uc?id=1kSguqLIcFnTgqs2r67W0qLUVi0QWyHvh", sep=";")
-df_kendaraan = pd.read_csv("../data/Additinal Data/jumlah_kendaraan_bermotor.csv", sep=";")
+df_kendaraan = pd.read_csv("/data/Additinal Data/jumlah_kendaraan_bermotor.csv", sep=";")
 
 # jumlah_kendaraan_bermotor_provinsi_jenis.csv
 # df_kendaraan_prov = pd.read_csv("https://drive.google.com/uc?id=1qFTbI3xHlvNMxdYDQMs34KG50n7Xrl5Y", sep=";")
-df_kendaraan_prov = pd.read_csv("../data/Additinal Data/jumlah_kendaraan_bermotor_provinsi_jenis.csv", sep=";")
+df_kendaraan_prov = pd.read_csv("/data/Additinal Data/jumlah_kendaraan_bermotor_provinsi_jenis.csv", sep=";")
 
 # jumlah_penduduk_provinsi_jk_all.csv
 # df_penduduk_all = pd.read_csv("https://drive.google.com/uc?id=1NZZlMpsApa_VSO75TQfpe4qbQs0CXQeu", sep=";")
-df_penduduk_all = pd.read_csv("../data/Additinal Data/jumlah_penduduk_provinsi_jk_all.csv", sep=";")
+df_penduduk_all = pd.read_csv("/data/Additinal Data/jumlah_penduduk_provinsi_jk_all.csv", sep=";")
 
 row2_spacer1, row2_1, row2_spacer2 = st.columns((.2, 7.1, .2))
 with row2_1:
