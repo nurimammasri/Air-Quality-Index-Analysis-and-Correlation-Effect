@@ -178,6 +178,7 @@ st.text('')
 row3_spacer1, row3_1, row3_spacer2 = st.columns((.2, 7.1, .2))
 with row3_1:
     st.subheader('Most Polluted Cities and Countries (IQAir Index)')
+    st.markdown("##### _Is it true that Indonesia has a very bad air index?_")
     st.markdown('')
 
 row4_spacer1, row4_1, row4_spacer2, row4_2, row4_spacer3  = st.columns((.2, 4.4, 0.1, 6.4, .2))
@@ -417,6 +418,7 @@ with row8_1:
 row9_spacer1, row9_1, row9_spacer2 = st.columns((.2, 7.1, .2))
 with row9_1:
     st.subheader('Air Quality Category and Critical Component')
+    st.markdown("##### _What are the critical components that have a high impact on Indonesian air?_")
     st.markdown('')
 
 categoricals = ['Critical Component',	'Category']
@@ -576,6 +578,7 @@ with row13_2:
 row14_spacer1, row14_1, row14_spacer2 = st.columns((.2, 7.1, .2))
 with row14_1:
     st.subheader('CO2 Emissions and Economic')
+    st.markdown("##### _Should Indonesia implement a Carbon Emissions Tax and its relationship to GDP per capita?_")
     st.markdown('')
 
 # DATA CLEANING
