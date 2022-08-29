@@ -201,6 +201,7 @@ with row4_1:
                 hover_data={'Rank_new':False, 'Rank':True, 'Population':True},
                 height=490)
     fig1.layout.plot_bgcolor = "white"
+    fig1.add_vline(x=13.1, line_width=3, line_dash="dash", line_color="green", annotation_text="Threshold Good")
     fig1.update_layout(margin=dict(t=40, b=10))
     fig1.update_xaxes(visible=False, showticklabels=False)
     st.plotly_chart(fig1, use_container_width=True)
@@ -403,7 +404,9 @@ with row8_1:
     fig= px.line(df_aqicty_indo_line, y = 'Air Quality Index', 
                 labels = { 'Air Quality Index': 'AQI'}, 
                 x = 'Month', color = 'City',
-                title = "Monthly Air Quality Index 2021")
+                title = "Monthly Air Quality Index 2021",
+                text="Air Quality Index")
+    fig.for_each_trace(lambda t: t.update(textfont_color="black", textposition='top right'))
     fig.layout.plot_bgcolor = "light grey"
     
     fig.update_layout(margin=dict(t=40, b=10))
