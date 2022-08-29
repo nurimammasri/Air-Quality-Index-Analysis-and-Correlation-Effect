@@ -591,15 +591,15 @@ with row13_2:
 
 with row13_3:
     corr_part = pearsonr(df[x_axis_val], df[y_axis_val])
-    st.markdown('##### Korelasi antara {} dengan {} (*Pearson*)'.format(x_axis_val, y_axis_val))
+    st.markdown('##### Correlation between {} and {} (*Pearson*)'.format(x_axis_val, y_axis_val))
     percent = round(corr_part[0]*100,2)
 
     if percent > 50:
-        percent_status = 'Korelasi Tinggi'
+        percent_status = 'High Correlation'
     elif percent > 30:
-        percent_status = 'Korelasi Sedang'
+        percent_status = 'Medium Correlation'
     else:
-        percent_status = 'Korelasi Rendah'
+        percent_status = 'Low Correlation'
 
     st.subheader(f'{percent}%')
     st.markdown(f'##### ***{percent_status}***')
