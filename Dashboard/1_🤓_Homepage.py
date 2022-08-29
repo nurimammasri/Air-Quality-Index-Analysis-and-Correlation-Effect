@@ -201,7 +201,11 @@ with row4_1:
                 hover_data={'Rank_new':False, 'Rank':True, 'Population':True},
                 height=490)
     fig1.layout.plot_bgcolor = "white"
-    fig1.add_vline(x=13.1, line_width=3, line_dash="dash", line_color="green", annotation_text="Threshold Good")
+    fig1.add_vline(
+        x=13.1, line_width=3, line_dash="dash", 
+        line_color="green", annotation_text="Threshold Good",
+        annotation_font_color="black",
+    )
     fig1.update_layout(margin=dict(t=40, b=10))
     fig1.update_xaxes(visible=False, showticklabels=False)
     st.plotly_chart(fig1, use_container_width=True)
@@ -234,6 +238,10 @@ with row4_2:
                 text="AQI",height=550)
     fig2.for_each_trace(lambda t: t.update(textfont_color="black", textposition='top right'))
     fig2.layout.plot_bgcolor = "light grey"
+    fig2.add_hrect(y0=23, y1=50,
+              annotation_text="Good", annotation_position="top left",
+              annotation_font_color="black",
+              fillcolor="green", opacity=0.15, line_width=0)
     fig2.update_yaxes(visible=False, showticklabels=False, )
     fig2.update_layout(margin=dict(t=40, b=10))
     st.plotly_chart(fig2, use_container_width=True)
