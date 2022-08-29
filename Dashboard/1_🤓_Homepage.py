@@ -13,6 +13,8 @@ import plotly.figure_factory as ff
 from sklearn.feature_selection import chi2
 from sklearn.feature_selection import SelectKBest
 
+from scipy.stats import pearsonr
+
 import warnings # Ignores any warning
 warnings.filterwarnings("ignore")
 pd.set_option('display.max_columns', None)
@@ -570,11 +572,16 @@ with row12_1:
     plot.layout.plot_bgcolor = "light grey"
     st.plotly_chart(plot, use_container_width=True)
 
-row13_spacer1, row13_1, row13_spacer2 = st.columns((.2, 7.1, .2))
+
+# Correlation
+st.subheader('Correlation Between Air Particles (Critical)')
+    
+row13_spacer1, row13_1, row13_2, row13_3, row13_spacer2 = st.columns((.2, 1,3,1, .2))
 with row13_1:
     x_axis_val = row13_1.selectbox('Select the X-axis', options=numericals, index=2)
     y_axis_val = row13_1.selectbox('Select the Y-axis', options=numericals, index=1)
 
+with row13_2:
     fig = px.scatter(df.sort_values("Category"), x=x_axis_val, y=y_axis_val, color="Category",
                     color_discrete_sequence=["green", "orange", "red"],
                     title="Correlation Category between {} dan {}".format(x_axis_val, y_axis_val))
@@ -582,6 +589,20 @@ with row13_1:
     fig.layout.plot_bgcolor = "light grey"
     st.plotly_chart(fig, use_container_width=True)
 
+with row13_3:
+    corr_part = pearsonr(df[x_axis_val], df[y_axis_val])
+    st.markdown('##### Korelasi antara {} dengan {} (*Pearson*)'.format(x_axis_val, y_axis_val))
+    percent = round(corr_part[0]*100,2)
+
+    if percent > 50:
+        percent_status = 'Korelasi Tinggi'
+    elif percent > 30:
+        percent_status = 'Korelasi Sedang'
+    else:
+        percent_status = 'Korelasi Rendah'
+
+    st.subheader(f'{percent}%')
+    st.markdown(f'##### ***{percent_status}***')
 
 row13_spacer1, row13_1, row13_spacer2, row13_2, row13_spacer3  = st.columns((.2, 6.4, 0.1, 4.4, .2))
 with row13_1:
