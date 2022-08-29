@@ -579,7 +579,7 @@ row14_spacer1, row14_1, row14_spacer2 = st.columns((.2, 7.1, .2))
 with row14_1:
     st.subheader('CO2 Emissions and Economic')
     st.markdown("##### _Should Indonesia implement a Carbon Emissions Tax and its relationship to GDP per capita?_")
-    st.markdown("#### _How it decreases carbon tax emission and supports economic growth?_")
+    st.markdown("##### _How it decreases carbon tax emission and supports economic growth?_")
     st.markdown('')
 
 # DATA CLEANING
