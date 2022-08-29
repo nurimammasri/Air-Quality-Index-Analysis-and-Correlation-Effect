@@ -24,6 +24,44 @@ st.set_page_config(
     layout="wide"
 )
 
+# Side Bar
+
+with st.sidebar:
+    st.title('Capstone Project Tetris Dashboard')
+    st.write('by: Nur Imam Masri')
+    
+    # Penjelasan Partikel Polusi
+    with st.expander('Apa itu PM10?'):
+        st.write('Menurut [BMKG](https://www.bmkg.go.id/kualitas-udara/informasi-partikulat-pm10.bmkg#:~:text=Partikulat%20(PM10)%20adalah%20Partikel,%3D%20150%20%C2%B5gram%2Fm3.), PM10 merupakan partikel udara berukuran 10 Mikrometer atau lebih kecil yang biasa ditemui pada debu dan asap.')
+    
+    with st.expander('Apa itu SO2?'):
+        st.write('[Gas SO2](https://dspace.uii.ac.id/handle/123456789/30912) adalah partikel gas polutan akibat pembakaran bahan bakar fosil seperti minyak yang mampu mengganggu sistem pernapasan manusia.')
+    
+    with st.expander('Apa itu CO?'):
+        st.write('[CO](https://www.alodokter.com/keracunan-karbon-monoksida) (Karbon Monoksida) adalah suatu gas yang timbul akibat asap hasil pembakaran bahan bakar kendaraan bermotor yang berlebihan.')
+    
+    with st.expander('Apa itu O3?'):
+        st.write('[O3](https://dlhk.jogjaprov.go.id/perlindungan-lapisan-ozon) (Ozon) merupakan lapisan molekul gas yang berfungsi untuk menyerap radiasi sinar ultraviolet yang berada di atmosfer bumi.')
+    
+    with st.expander('Apa itu NO2?'):
+        st.write('[NO2](https://pengen-tau.weebly.com/nitrogen-oksida.html) (Nitrogen Dioksida) merupakan gas polutan yang apabila memiliki kadara polusi yang tinggi, maka akan mengganggu paru - paru manusia.')
+    
+    with st.expander('Data Source'):
+        st.markdown("""
+        - [x] [AIR QUALITY INDEX (by cities)](https://www.kaggle.com/datasets/ramjasmaurya/most-polluted-cities-and-countries-iqair-index)
+        - [x] [AIR QUALITY INDEX (top countries)](https://www.kaggle.com/datasets/ramjasmaurya/most-polluted-cities-and-countries-iqair-index)
+        - [x] [Pollutant Standards Index Jogja 2020](https://www.kaggle.com/datasets/adhang/air-quality-in-yogyakarta-indonesia-2020)
+        - [x] [GDP Per Capita](https://data.worldbank.org/indicator/NY.GDP.PCAP.CD)
+        - [x] [CO2 Emissions Per Capita](https://data.worldbank.org/indicator/EN.ATM.CO2E.PC)
+        - [x] [Electricity Generated Year](https://github.com/owid/energy-data)
+        - [x] [Annual CO Emissions by Region](https://carbonpricingdashboard.worldbank.org/map_data)
+        - [x] [Perkembangan Jumlah Kendaraan Bermotor Menurut Jenis (Unit), 2018-2020](https://www.bps.go.id/indicator/17/57/1/jumlah-kendaraan-bermotor.html)
+        - [x] [Jumlah Kendaraan Bermotor Menurut Provinsi dan Jenis Kendaraan (unit)](https://www.bps.go.id/indikator/indikator/view_data_pub/0000/api_pub/V2w4dFkwdFNLNU5mSE95Und2UDRMQT09/da_10/1)
+        - [x] [Jumlah Penduduk Hasil Proyeksi Menurut Provinsi dan Jenis Kelamin (Ribu Jiwa), 2018-2020](https://www.bps.go.id/indicator/12/1886/1/jumlah-penduduk-hasil-proyeksi-menurut-provinsi-dan-jenis-kelamin.html)
+                
+        """)
+
+
 # ------------------------------------
 
 ####################
