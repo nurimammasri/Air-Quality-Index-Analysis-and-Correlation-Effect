@@ -381,9 +381,13 @@ with row7_2:
 
 row8_spacer1, row8_1, row8_spacer2 = st.columns((.2, 7.1, .2))
 with row8_1:
+
     # line plot with plotly express
     df_aqicty_indo_line = df_aqicty_indo.copy()
 
+    city = row8_1.multiselect('Select the City', options=df_aqicty_indo["City"].unique(), default=["Jakarta, Indonesia", "Surabaya, Indonesia", "Pekanbaru, Indonesia"])
+
+    df_aqicty_indo_line = df_aqicty_indo_line[df_aqicty_indo_line["City"].isin(city)]
     # dropping unused columns
     df_aqicty_indo_line.drop(['2021', '2020', '2019', '2018', '2017', 'country', 'city_only'],
                     axis=1, inplace=True)
