@@ -78,9 +78,9 @@ with row0_1:
     st.title('Air Quality Index (AQI) Analysis 🎯✅ and Correlation Effect ⛅🍃')
 with row0_2:
     st.text("")
-    st.subheader('Streamlit App by [Nur Imam Masri](https://www.linkedin.com/in/nurimammasri/)')
-    st.markdown("You can find the source code in:")
-    st.markdown("[Source Code GitHub Repository](https://github.com/nurimammasri/Air-Quality-Index-Analysis-and-Correlation-Effect)")
+    st.markdown("<span style='text-align: right;display:block'>Streamlit App by [Nur Imam Masri](https://www.linkedin.com/in/nurimammasri/)</span>", unsafe_allow_html=True)
+    st.markdown("<span style='text-align: right;display:block'>You can find the source code in:", unsafe_allow_html=True)
+    st.markdown("<span style='text-align: right;display:block'>[Source Code GitHub Repository](https://github.com/nurimammasri/Air-Quality-Index-Analysis-and-Correlation-Effect)", unsafe_allow_html=True)
     
 
 row1_spacer1, row1_1, row1_spacer2, row1_2, row1_spacer3 = st.columns((.1, 3.3, .1, 2.5, .1))
