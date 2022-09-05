@@ -116,13 +116,12 @@ with row1_1:
 
 
 with row1_2:
-    st.text("")
-    # if os.path.dirname(os.getcwd()) == "/app":
-    #     d = "/app/air-quality-index-analysis-and-correlation-effect/"
-    # else:
-    #     d=""
-    # image = Image.open(d+'images/air-pollution-smoke-emission.jpg')
-    # st.image(image) # caption='air-pollution-smoke-emission.jpg'
+    if os.path.dirname(os.getcwd()) == "/app":
+        d = "/app/air-quality-index-analysis-and-correlation-effect/"
+    else:
+        d=""
+    image = Image.open(d+'images/air-pollution-smoke-emission.jpg')
+    st.image(image) # caption='air-pollution-smoke-emission.jpg'
 
 ################
 ### ANALYSIS ###
