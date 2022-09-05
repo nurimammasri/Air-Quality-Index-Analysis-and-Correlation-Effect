@@ -78,21 +78,15 @@ with row0_1:
 with row0_2:
     st.text("")
     st.subheader('Streamlit App by [Nur Imam Masri](https://www.linkedin.com/in/nurimammasri/)')
-
-
-row1_spacer1, row1_1, row1_spacer2, row1_2, row1_spacer3 = st.columns((.1, 2.3, .1, 1.3, .1))
-with row1_1:
     st.markdown("You can find the source code in:")
     st.markdown("[Air Quality Index Analysis and Correlation Effect GitHub Repository](https://github.com/nurimammasri/Air-Quality-Index-Analysis-and-Correlation-Effect)")
     
-    st.markdown("**Air pollution** is the contamination of air due to the presence of substances in the atmosphere that are harmful to the health of humans and other living beings, or cause damage to the climate or to materials.")
-with row1_2:
-    image = Image.open('images/air-pollution-smoke-emission.jpg')
-    st.image(image, caption='air-pollution-smoke-emission.jpg')
 
-
-row1_spacer1, row1_1, row1_spacer2 = st.columns((.1, 3.2, .1))
+row1_spacer1, row1_1, row1_spacer2, row1_2, row1_spacer3 = st.columns((.1, 2.3, .1, 1.3, .1))
 with row1_1:
+
+    st.markdown("**Air pollution** is the contamination of air due to the presence of substances in the atmosphere that are harmful to the health of humans and other living beings, or cause damage to the climate or to materials.")
+
     st.markdown("""
             There are many different types of air pollutants, such as :
 
@@ -120,6 +114,9 @@ with row1_1:
     st.markdown("*`PLEASE WAIT A MOMENT FOR THE DATA TO LOAD`*")
 
 
+with row1_2:
+    image = Image.open('images/air-pollution-smoke-emission.jpg')
+    st.image(image, caption='air-pollution-smoke-emission.jpg')
 
 ################
 ### ANALYSIS ###
