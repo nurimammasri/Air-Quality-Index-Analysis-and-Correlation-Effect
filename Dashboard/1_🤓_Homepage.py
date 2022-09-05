@@ -80,7 +80,7 @@ with row0_2:
     st.text("")
     st.subheader('Streamlit App by [Nur Imam Masri](https://www.linkedin.com/in/nurimammasri/)')
     st.markdown("You can find the source code in:")
-    st.markdown("[Air Quality Index Analysis and Correlation Effect GitHub Repository](https://github.com/nurimammasri/Air-Quality-Index-Analysis-and-Correlation-Effect)")
+    st.markdown("[Source Code GitHub Repository](https://github.com/nurimammasri/Air-Quality-Index-Analysis-and-Correlation-Effect)")
     
 
 row1_spacer1, row1_1, row1_spacer2, row1_2, row1_spacer3 = st.columns((.1, 3.3, .1, 2.5, .1))
@@ -108,12 +108,12 @@ with row1_1:
             
             <span style='color:orange;font-weight:1000;font-size:17px'>Air pollution can cause diseases, allergies, and even death to humans</span>
 
-            It can also cause harm to other living organisms such as animals and food crops, and may damage the natural environment (for example, climate change, ozone depletion or habitat degradation) or built environment (for example, acid rain).
+            It can also cause harm to other living organisms such as **animals and food crops, and may damage the natural environment** (for example, climate change, ozone depletion or habitat degradation) or built environment (for example, acid rain).
 
-            Both human activity and natural processes can generate air pollution.
+            Both **human activity** and **natural processes** can generate air pollution.
     """, unsafe_allow_html=True)
-    st.markdown("*`PLEASE WAIT A MOMENT FOR THE DATA TO LOAD`*")
-
+    st.text("")
+    st.markdown("##### ***`PLEASE WAIT A MOMENT FOR THE DATA TO LOAD`***")
 
 with row1_2:
     if os.path.dirname(os.getcwd()) == "/app":
@@ -181,7 +181,9 @@ df_penduduk_all = pd.read_csv(d+"/data/Additinal Data/jumlah_penduduk_provinsi_j
 
 row2_spacer1, row2_1, row2_spacer2 = st.columns((.2, 7.1, .2))
 with row2_1:
-
+    st.subheader('Data Source')
+    st.markdown("_Source : IQAir website,  Dinas Lingkungan Hidup, BPS, World Bank, Ember_")
+    
     st.markdown("You can click here to see the raw data first 👇")
 
     see_data = st.expander('AIR QUALITY INDEX (by cities)')
