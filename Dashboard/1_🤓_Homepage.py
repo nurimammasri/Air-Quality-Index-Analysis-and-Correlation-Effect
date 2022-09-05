@@ -86,7 +86,7 @@ with row0_2:
 row1_spacer1, row1_1, row1_spacer2, row1_2, row1_spacer3 = st.columns((.1, 3.3, .1, 2.5, .1))
 with row1_1:
 
-    st.markdown("<span style='color:orange;font-weight:1000;font-size:25px'>**Air pollution**</span> is the contamination of air due to the presence of substances in the atmosphere that are harmful to the health of humans and other living beings, or cause damage to the climate or to materials.", unsafe_allow_html=True)
+    st.markdown("<span style='color:orange;font-weight:1000;font-size:30px'>**Air Pollution**</span> is the contamination of air due to the presence of substances in the atmosphere that are harmful to the health of humans and other living beings, or cause damage to the climate or to materials.", unsafe_allow_html=True)
 
     st.markdown("""
             **There are many different types of air pollutants, such as :**
@@ -103,7 +103,7 @@ with row1_1:
             Pb - Timah
             CO2 - Carbon Diaoksida
             ```
-            * <span style='color:#EE4B2B;font-weight:1000;font-size:18px'>*Particulates*</span> (both organic and inorganic), and
+            * <span style='color:#EE4B2B;font-weight:1000;font-size:18px'>*Particulates*</span> (both organic and inorganic)
             * <span style='color:#EE4B2B;font-weight:1000;font-size:18px'>*Biological Molecules*</span>
             
             <span style='color:orange;font-weight:1000;font-size:17px'>Air pollution can cause diseases, allergies, and even death to humans</span>
@@ -111,6 +111,11 @@ with row1_1:
             It can also cause harm to other living organisms such as **animals and food crops, and may damage the natural environment** (for example, climate change, ozone depletion or habitat degradation) or built environment (for example, acid rain).
 
             Both **human activity** and **natural processes** can generate air pollution.
+
+            #### **Objectives :**
+            - Is it true that Indonesia has a very bad air index?
+            - What are the critical components that have a high impact on Indonesian air?
+            - Should Indonesia implement a Carbon Emissions Tax and its relationship to GDP per capita to support economic growth?
     """, unsafe_allow_html=True)
     st.text("")
     st.markdown("##### ***`PLEASE WAIT A MOMENT FOR THE DATA TO LOAD`***")
