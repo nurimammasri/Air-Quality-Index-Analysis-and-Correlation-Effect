@@ -86,7 +86,7 @@ with row0_2:
 row1_spacer1, row1_1, row1_spacer2, row1_2, row1_spacer3 = st.columns((.1, 3.3, .1, 2.5, .1))
 with row1_1:
 
-    st.markdown("**Air pollution** is the contamination of air due to the presence of substances in the atmosphere that are harmful to the health of humans and other living beings, or cause damage to the climate or to materials.")
+    st.markdown("<span style='color:orange;font-weight:1000;font-size:25px'>**Air pollution**</span> is the contamination of air due to the presence of substances in the atmosphere that are harmful to the health of humans and other living beings, or cause damage to the climate or to materials.", unsafe_allow_html=True)
 
     st.markdown("""
             There are many different types of air pollutants, such as :
