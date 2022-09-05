@@ -73,9 +73,9 @@ with st.sidebar:
 ### INTRODUCTION ###
 ####################
 
-row0_spacer1, row0_1, row0_spacer2, row0_2, row0_spacer3 = st.columns((.1, 2.3, .1, 1.3, .1))
+row0_spacer1, row0_1, row0_spacer2, row0_2, row0_spacer3 = st.columns((.1, 3.3, .05, 2.5, .1))
 with row0_1:
-    st.title('Air Quality Index Analysis and Correlation Effect ⛅🏝🍃')
+    st.title('Air Quality Index (AQI) Analysis 🎯✅ and Correlation Effect ⛅🍃')
 with row0_2:
     st.text("")
     st.subheader('Streamlit App by [Nur Imam Masri](https://www.linkedin.com/in/nurimammasri/)')
@@ -89,9 +89,9 @@ with row1_1:
     st.markdown("<span style='color:orange;font-weight:1000;font-size:25px'>**Air pollution**</span> is the contamination of air due to the presence of substances in the atmosphere that are harmful to the health of humans and other living beings, or cause damage to the climate or to materials.", unsafe_allow_html=True)
 
     st.markdown("""
-            There are many different types of air pollutants, such as :
+            **There are many different types of air pollutants, such as :**
 
-            * *Gases* (including ammonia, carbon monoxide, sulfur dioxide, nitrous oxides, methane, carbon dioxide and chlorofluorocarbons),
+            * <span style='color:#EE4B2B;font-weight:1000;font-size:18px'>*Gases*</span> (including *ammonia, carbon monoxide, sulfur dioxide, nitrous oxides, methane, carbon dioxide* and *chlorofluorocarbons*),
             ```
             PM10 - Particulate Matter
             SO2 - Sulfur Dioxide
@@ -103,15 +103,15 @@ with row1_1:
             Pb - Timah
             CO2 - Carbon Diaoksida
             ```
-            * *Particulates* (both organic and inorganic), and
-            * *Biological Molecules*
+            * <span style='color:#EE4B2B;font-weight:1000;font-size:18px'>*Particulates*</span> (both organic and inorganic), and
+            * <span style='color:#EE4B2B;font-weight:1000;font-size:18px'>*Biological Molecules*</span>
             
-            Air pollution can cause diseases, allergies, and even death to humans;
+            <span style='color:orange;font-weight:1000;font-size:17px'>Air pollution can cause diseases, allergies, and even death to humans</span>
 
             It can also cause harm to other living organisms such as animals and food crops, and may damage the natural environment (for example, climate change, ozone depletion or habitat degradation) or built environment (for example, acid rain).
 
             Both human activity and natural processes can generate air pollution.
-    """)
+    """, unsafe_allow_html=True)
     st.markdown("*`PLEASE WAIT A MOMENT FOR THE DATA TO LOAD`*")
 
 
