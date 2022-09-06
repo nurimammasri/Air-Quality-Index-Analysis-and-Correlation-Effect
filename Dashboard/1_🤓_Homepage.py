@@ -36,6 +36,22 @@ with st.sidebar:
     st.write('by: Nur Imam Masri')
     
     # Penjelasan Partikel Polusi
+    with st.expander('Apa itu AQI?'):
+        st.write("""
+        **The air quality index (AQI)** is an index for reporting air quality on a daily basis. It is a measure of how air pollution affects one's health within a short time period. 
+        
+        The purpose of the AQI is to help people know how the local air quality impacts their health. The Environmental Protection Agency (EPA) calculates the AQI for five major air pollutants, for which national air quality standards have been established to safeguard public health.
+        
+        1. Ground-level ozone
+        2. Particle pollution/particulate matter (PM2.5/pm 10)
+        3. Carbon Monoxide
+        4. Sulfur dioxide
+        5. Nitrogen dioxide
+        
+        The higher the AQI value, the greater the level of air pollution and the greater the health concerns. The concept of AQI has been widely used in many developed countries for over the last three decades. AQI quickly disseminates air quality information in real-time.
+                
+        """)
+    
     with st.expander('Apa itu PM10?'):
         st.write('Menurut [BMKG](https://www.bmkg.go.id/kualitas-udara/informasi-partikulat-pm10.bmkg#:~:text=Partikulat%20(PM10)%20adalah%20Partikel,%3D%20150%20%C2%B5gram%2Fm3.), PM10 merupakan partikel udara berukuran 10 Mikrometer atau lebih kecil yang biasa ditemui pada debu dan asap.')
     
