@@ -160,6 +160,9 @@ with row1_2:
     image = Image.open(d+'images/sources-of-air-pollution.png')
     st.image(image, caption="Source of Air Pollution") # caption='Designed by brgfx / Freepik'
 
+    image = Image.open(d+'images/aqi2.png')
+    st.image(image, caption="Air Quality Index") # caption='Designed by brgfx / Freepik'
+
 
 ################
 ### ANALYSIS ###
