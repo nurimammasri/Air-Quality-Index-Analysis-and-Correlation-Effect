@@ -112,6 +112,19 @@ with row1_1:
 
             Both **human activity** and **natural processes** can generate air pollution.
 
+            ```
+            Berdasarkan laporan Kualitas Udara Dunia IQAir 2021 
+            pada Maret 2022, Indonesia menempati peringkat teratas 
+            sebagai negara paling polusi di dunia dengan konsentrasi 
+            PM2,5 tertinggi yakni 34,3 μg/m3. Indonesia juga mendapatkan 
+            peringkat pertama di Asia Tenggara sebagai negara yang berpolusi udara.
+
+            ~ "10 Negara Paling Berpolusi di Dunia, Indonesia Nomor Berapa?" 
+            selengkapnya https://www.detik.com/edu/detikpedia/d-6137633/10-negara-paling-berpolusi-di-dunia-indonesia-nomor-berapa.
+            ```
+
+            ##### **Is this true and relevant according to the data?**
+
             #### **Objectives :**
             - Is it true that Indonesia has a very bad air index?
             - What are the critical components that have a high impact on Indonesian air?
