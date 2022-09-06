@@ -123,7 +123,7 @@ with row1_1:
             selengkapnya https://www.detik.com/edu/detikpedia/d-6137633/10-negara-paling-berpolusi-di-dunia-indonesia-nomor-berapa.
             ```
 
-            ##### **Is this true and relevant according to the data?**
+            ##### **Is this statement true and relevant according to the data?**
 
             #### **Objectives :**
             - Is it true that Indonesia has a very bad air index?
