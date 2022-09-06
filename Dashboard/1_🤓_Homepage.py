@@ -200,7 +200,7 @@ df_penduduk_all = pd.read_csv(d+"/data/Additinal Data/jumlah_penduduk_provinsi_j
 row2_spacer1, row2_1, row2_spacer2 = st.columns((.2, 7.1, .2))
 with row2_1:
     st.subheader('Data Source')
-    st.markdown("_Source : IQAir website,  Dinas Lingkungan Hidup, BPS, World Bank, Ember_")
+    st.markdown("_Source 10 Data : IQAir website,  Dinas Lingkungan Hidup, BPS, World Bank, Ember_")
     
     st.markdown("You can click here to see the raw data first 👇")
 
