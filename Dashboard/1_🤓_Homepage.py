@@ -106,7 +106,7 @@ with row1_1:
             * <span style='color:#EE4B2B;font-weight:1000;font-size:18px'>*Particulates*</span> (both organic and inorganic)
             * <span style='color:#EE4B2B;font-weight:1000;font-size:18px'>*Biological Molecules*</span>
             
-            <span style='color:orange;font-weight:1000;font-size:17px'>Air pollution can cause diseases, allergies, and even death to humans</span>
+            <span style='color:orange;font-weight:1000;font-size:19px'>🚨 Air pollution can cause diseases, allergies, and even death to humans 🚨</span>
 
             It can also cause harm to other living organisms such as **animals and food crops, and may damage the natural environment** (for example, climate change, ozone depletion or habitat degradation) or built environment (for example, acid rain).
 
@@ -123,7 +123,7 @@ with row1_1:
             selengkapnya https://www.detik.com/edu/detikpedia/d-6137633/10-negara-paling-berpolusi-di-dunia-indonesia-nomor-berapa.
             ```
 
-            ##### **Is this statement true and relevant according to the data?**
+            ##### **Is this statement true and relevant according to the data? 🤔**
 
             #### **Objectives :**
             - Is it true that Indonesia has a very bad air index?
