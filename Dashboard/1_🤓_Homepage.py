@@ -153,7 +153,7 @@ with row1_2:
     if os.path.dirname(os.getcwd()) == "/app":
         d = "/app/air-quality-index-analysis-and-correlation-effect/Dashboard/"
     else:
-        d=""
+        d=os.getcwd()+"/"
     image = Image.open(d+'images/air-pollution-smoke-emission.jpg')
     st.image(image) # caption='air-pollution-smoke-emission.jpg'
 
