@@ -51,6 +51,9 @@ The use of fossil energy will produce waste in the form of CO2 gas which causes 
 
 
 ## Dashboard and Analysis
+
+https://airqualityindextetris.herokuapp.com/
+
 https://nurimammasri-air-quality-index-anal-dashboard1--homepage-gtg2r6.streamlitapp.com/
 
 ## Features
