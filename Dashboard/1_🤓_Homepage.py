@@ -176,6 +176,8 @@ with row1_2:
 import os
 if os.path.dirname(os.getcwd()) == "/app":
     d = "/app/air-quality-index-analysis-and-correlation-effect"
+elif os.getcwd() == "/app":
+    d = "Dashboard"
 else:
     d = os.path.dirname(os.getcwd())
 # Clean - AIR QUALITY INDEX (by cities).csv
