@@ -150,6 +150,7 @@ with row1_1:
     st.markdown("##### ***`PLEASE WAIT A MOMENT FOR THE DATA TO LOAD`***")
 
 with row1_2:
+    st.text(os.path.dirname(os.getcwd()))
     if os.path.dirname(os.getcwd()) == "/app":
         d = "/app/air-quality-index-analysis-and-correlation-effect/Dashboard/"
     else:
