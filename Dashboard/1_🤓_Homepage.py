@@ -150,10 +150,13 @@ with row1_1:
     st.markdown("##### ***`PLEASE WAIT A MOMENT FOR THE DATA TO LOAD`***")
 
 with row1_2:
+    # Streamlit
     if os.path.dirname(os.getcwd()) == "/app":
         d = "/app/air-quality-index-analysis-and-correlation-effect/Dashboard/"
+    # Heroku
     elif os.getcwd() == "/app":
         d = "Dashboard/"
+    # Local
     else:
         d = os.getcwd()+"/"
     image = Image.open(d+'images/air-pollution-smoke-emission.jpg')
@@ -174,12 +177,16 @@ with row1_2:
 
 # Load Data
 import os
+# Streamlit
 if os.path.dirname(os.getcwd()) == "/app":
     d = "/app/air-quality-index-analysis-and-correlation-effect/"
+# Heroku
 elif os.getcwd() == "/app":
     d = ""
+# Local
 else:
     d = os.path.dirname(os.getcwd())+"/"
+    
 # Clean - AIR QUALITY INDEX (by cities).csv
 # df_aqicty = pd.read_csv("https://drive.google.com/uc?id=1V086i1eHdM08nk67F4l2D7_bj-ZJk8PY")
 df_aqicty = pd.read_csv(d+"data/Most Polluted Cities and Countries (IQAir Index)/Clean - AIR QUALITY INDEX (by cities).csv")
