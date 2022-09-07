@@ -153,7 +153,7 @@ with row1_2:
     if os.path.dirname(os.getcwd()) == "/app":
         d = "/app/air-quality-index-analysis-and-correlation-effect/Dashboard/"
     else:
-        d=os.getcwd()+"/"
+        d = os.getcwd()+"/"
     image = Image.open(d+'images/air-pollution-smoke-emission.jpg')
     st.image(image) # caption='air-pollution-smoke-emission.jpg'
 
@@ -175,7 +175,7 @@ import os
 if os.path.dirname(os.getcwd()) == "/app":
     d = "/app/air-quality-index-analysis-and-correlation-effect"
 else:
-    d=".."
+    d = os.path.dirname(os.getcwd())
 # Clean - AIR QUALITY INDEX (by cities).csv
 # df_aqicty = pd.read_csv("https://drive.google.com/uc?id=1V086i1eHdM08nk67F4l2D7_bj-ZJk8PY")
 df_aqicty = pd.read_csv(d+"/data/Most Polluted Cities and Countries (IQAir Index)/Clean - AIR QUALITY INDEX (by cities).csv")
