@@ -25,6 +25,6 @@ st.title("Projects")
 
 pdf = os.getcwd()+'/docs/portfolio.pdf'
 st.markdown(f"""
-<embed src="https://drive.google.com/uc?id=1UdXtGNRX1KC-qqIakEDLgxnm7V6heHa7" width="1300" height="650">
+<iframe src="https://drive.google.com/uc?id=1UdXtGNRX1KC-qqIakEDLgxnm7V6heHa7" width="1300" height="650"></iframe>
 """, unsafe_allow_html=True)
 
